@@ -32,7 +32,7 @@
 >
 > **I uploaded ClubCart specifically because the script is deprecated.** I created it personally as a proof of concept, not with the intention of gaining an advantage during drops.
 >
-> **I do not condone scripting or botting to purchase Pokémon products.** ClubCart stays public only as a portfolio project. See [Deprecation](#deprecation).
+> **I do not condone scripting or botting to purchase Pokémon products.** ClubCart stays public only as a portfolio project.
 
 > [!IMPORTANT]
 > **ClubCart is an independent personal project.**
@@ -42,7 +42,7 @@
 
 ## Overview
 
-ClubCart was built to take a shopping list of Sam's Club product pages and turn it into a single add-to-cart script. The app itself still runs and works as described below, but the script it generates no longer does (see [Deprecation](#deprecation)). Here's how the app works:
+ClubCart was built to take a shopping list of Sam's Club product pages and turn it into a single add-to-cart script. The app itself still runs and works as described below, but the script it generates no longer does (see the notice above). Here's how the app works:
 
 1. **Add products.** Pick a quantity, optionally type an alias, and paste a product page URL. Only `https` samsclub.com product pages are accepted.
 2. **Review the list.** The List dialog shows every item with its alias, URL, and quantity, and lets you remove any of them.
@@ -72,7 +72,7 @@ ClubCart was built to take a shopping list of Sam's Club product pages and turn 
 
 - One script for the whole list, with each item's ID, offer ID, quantity, name, and alias
 - Made up to five attempts per item, checking the cart's quantity after each one
-- **No longer works.** See [Deprecation](#deprecation).
+- **No longer works.**
 
 ### Sound & Motion
 
@@ -80,18 +80,6 @@ ClubCart was built to take a shopping list of Sam's Club product pages and turn 
 - Animations for adding, errors, loading, copying, and a full-screen reset
 - Respects the system's reduce-motion setting
 - The whole interface scales with the window size
-
----
-
-## Deprecation
-
-**The ATC script is deprecated and does not work.** An update broke the add-to-cart behavior it relied on, and the script is no longer supported. I will not be elaborating further on what update broke it.
-
-**This project was uploaded specifically because the script is deprecated.** I personally created the script as a proof of concept, not with the intention of having an advantage during drops.
-
-**I do not condone scripting or botting to purchase Pokémon products.**
-
-ClubCart is kept public only as a portfolio project, to show the desktop app's interface, animation and sound design, and Electron architecture. The app still builds and runs, and the script it generates is left in place only as part of that record. Don't use it.
 
 ---
 
@@ -105,8 +93,6 @@ ClubCart is kept public only as a portfolio project, to show the desktop app's i
 | Sounds and animations                           | ✅ Implemented                        |
 | Custom app icon                                 | ✅ Implemented                        |
 | Packaging for macOS, Windows, and Linux         | 🚧 Configured, not signed or notarized |
-| Published downloads                             | ❌ Not started                        |
-| Automated tests                                 | ❌ Not started                        |
 
 ---
 
