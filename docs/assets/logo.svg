@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-label="ClubCart logo" shape-rendering="crispEdges">
+  <!-- Tile: the app's red header over its ink band -->
+  <rect x="2" y="2" width="92" height="92" rx="18" fill="#3A3F4B" shape-rendering="geometricPrecision"/>
+  <rect x="6" y="6" width="84" height="84" rx="14" fill="#E5523F" shape-rendering="geometricPrecision"/>
+  <!-- Pixel cart on a 6-unit grid -->
+  <g fill="#3A3F4B">
+    <!-- handle -->
+    <rect x="12" y="18" width="12" height="6"/>
+    <rect x="18" y="24" width="6" height="6"/>
+    <!-- basket outline -->
+    <rect x="18" y="30" width="66" height="6"/>
+    <rect x="24" y="36" width="6" height="18"/>
+    <rect x="78" y="36" width="6" height="12"/>
+    <rect x="72" y="48" width="6" height="6"/>
+    <rect x="24" y="54" width="54" height="6"/>
+    <!-- base rail -->
+    <rect x="30" y="60" width="6" height="6"/>
+    <rect x="30" y="66" width="48" height="6"/>
+    <!-- wheels -->
+    <rect x="30" y="72" width="12" height="12"/>
+    <rect x="60" y="72" width="12" height="12"/>
+  </g>
+  <!-- basket fill: the app's yellow buttons -->
+  <g fill="#F6D77A">
+    <rect x="30" y="36" width="48" height="12"/>
+    <rect x="30" y="48" width="42" height="6"/>
+  </g>
+  <!-- basket slats -->
+  <g fill="#E0B84E">
+    <rect x="42" y="36" width="6" height="18"/>
+    <rect x="60" y="36" width="6" height="18"/>
+  </g>
+  <!-- highlight + wheel hubs -->
+  <rect x="30" y="36" width="6" height="6" fill="#FFF3C8"/>
+  <rect x="33" y="75" width="6" height="6" fill="#FBF6EC"/>
+  <rect x="63" y="75" width="6" height="6" fill="#FBF6EC"/>
+</svg>
