@@ -1,0 +1,135 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://vite.dev/guide/features.html#css
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@600;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+/* ─── Theme (softened, lighter palette) ────────────────────────── */
+:root {
+  --red: #e5523f;
+  --red-dark: #cc4232;
+  --yellow: #f6d77a;
+  --yellow-hover: #f9e199;
+  --blue: #6f9fcf;
+  --navy: #3e5577;
+  --ink: #3a3f4b; /* outlines: soft charcoal instead of near-black */
+  --white: #ffffff;
+  --cream: #fbf6ec;
+  --panel: #ffffff;
+  --text: #2f3440;
+  --green: #5bb974; /* success flash */
+  --green-dark: #3f9a5a;
+  --radius: 0.875rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* ─── Window scaling ───────────────────────────────────────────── */
+/* Every size in this file is in rem (multiples of this font size), so the
+   whole design scales together. It grows with the window's width and height:
+   about 16px at the default 1024×728 window, never below 12px or above 22px.
+   Adjust the clamp() limits to change how small/large it can get. */
+html {
+  font-size: clamp(12px, 0.8vw + 0.6vh + 3.5px, 22px);
+}
+
+/* ─── Page ─────────────────────────────────────────────────────── */
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: 'Nunito', system-ui, sans-serif;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Soft red top, thin band, light cream-to-sky bottom, faint dots. */
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.18) 1.5px, transparent 1.5px) 0 0 /
+      22px 22px,
+    linear-gradient(
+      180deg,
+      #ee7663 0%,
+      var(--red) 34%,
+      var(--ink) 34%,
+      var(--ink) 35.5%,
+      var(--cream) 35.5%,
+      #e6eff8 100%
+    );
+  background-attachment: fixed;
+}
+/* ─── Buttons ──────────────────────────────────────────────────── */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.625rem;
+  padding: 0.75rem 1.625rem;
+  border-radius: var(--radius);
+  border: 0.1875rem solid var(--ink);
+  background: var(--yellow);
+  color: var(--text);
+  font:
+    800 1.05rem 'Nunito',
+    system-ui,
+    sans-serif;
+  letter-spacing: 0.02em;
+  box-shadow: 0 0.25rem 0 var(--ink);
+  cursor: pointer;
+  transition:
+    transform 0.12s,
+    box-shadow 0.12s,
+    background 0.15s;
+}
+
+/* Gentle hover: slightly lighter and a small lift. */
+button:hover {
+  background: var(--yellow-hover);
+  transform: translateY(-0.0625rem);
+  box-shadow: 0 0.3125rem 0 var(--ink);
+}
+
+button:active {
+  transform: translateY(0.1875rem);
+  box-shadow: 0 0.0625rem 0 var(--ink);
+}
+
+button:focus-visible {
+  outline: 0.1875rem solid var(--blue);
+  outline-offset: 0.1875rem;
+}
+
+/* Disabled (e.g. Create String while it runs): flat, muted, no hover lift. */
+button:disabled,
+button:disabled:hover,
+button:disabled:active {
+  background: #efe6c8;
+  color: #6b7280;
+  transform: translateY(0.125rem);
+  box-shadow: 0 0.125rem 0 var(--ink);
+  cursor: progress;
+}
+
+/* Keeps Create String the same width while its label changes. */
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+/* ─── Misc ─────────────────────────────────────────────────────── */
+li {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  height: fit-content;
+  width: fit-content;
+  margin: 0.625rem;
+}
