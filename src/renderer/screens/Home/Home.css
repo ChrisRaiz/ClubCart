@@ -1,0 +1,70 @@
+/* Home screen: page column layout and the reset transition. */
+.container {
+  /* Scales with the root size, but never wider than the window. */
+  width: min(45rem, 100vw);
+  /* Exactly the window's height, so the output box (flex: 1 below) takes
+     whatever space is left. When something appears above it, like the URL
+     error message, the box shrinks instead of the page growing past the
+     window. min-content lets the page grow only if even the box's minimum
+     height can't fit (very short windows). */
+  height: 100vh;
+  min-height: min-content;
+  padding: 2rem 1.25rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* centers everything when the box hits its max */
+  gap: 1.25rem;
+}
+.container.isResetting {
+  animation: resetOut 0.18s ease-in forwards;
+  pointer-events: none; /* no clicks mid-reset */
+}
+
+.container.isResetting .ball {
+  animation: ballSpinOut 0.18s ease-in forwards;
+}
+
+@keyframes resetOut {
+  to {
+    opacity: 0.35;
+  }
+}
+
+/* The fresh screen fades back up from where the old one dimmed to. */
+.container.isFresh {
+  animation: resetIn 0.22s ease-out;
+}
+
+.container.isFresh .ball {
+  animation:
+    ballSpinIn 0.3s ease-out,
+    wobble 3.2s ease-in-out 0.3s infinite; /* then the usual idle wobble */
+}
+
+@keyframes resetIn {
+  from {
+    opacity: 0.35;
+  }
+}
+
+@keyframes ballSpinOut {
+  to {
+    transform: rotate(-180deg);
+  }
+}
+
+@keyframes ballSpinIn {
+  from {
+    transform: rotate(180deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .container.isResetting,
+  .container.isFresh,
+  .container.isResetting .ball,
+  .container.isFresh .ball {
+    animation: none;
+  }
+}
