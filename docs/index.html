@@ -84,14 +84,14 @@ h1 { font: 400 clamp(30px, 5.2vw, 46px)/1.2 var(--pixel); margin: 22px 0 18px; c
 .lede { font-size: 19.5px; margin: 0 0 32px; max-width: 38em; color: #3E4350; }
 
 /* The signature element: the real app, recorded, in an app window */
-.window { max-width: 920px; border: 3px solid var(--ink); border-radius: 16px; background: var(--ink); box-shadow: 0 8px 0 var(--ink), 0 30px 50px -30px rgba(58,63,75,.55); overflow: hidden; }
+.window { max-width: 800px; border: 3px solid var(--ink); border-radius: 16px; background: var(--ink); box-shadow: 0 8px 0 var(--ink), 0 30px 50px -30px rgba(58,63,75,.55); overflow: hidden; }
 .window .bar { display: flex; align-items: center; gap: 8px; padding: 10px 14px; background: #2E323C; color: #C9CDD6; font: 400 10px/1 var(--pixel); }
 .window .bar i { width: 12px; height: 12px; border-radius: 50%; background: #FF5F57; }
 .window .bar i:nth-child(2) { background: #FEBC2E; }
 .window .bar i:nth-child(3) { background: #28C840; }
 .window .bar span { margin: 0 auto; padding-right: 52px; }
 .player { position: relative; background: var(--paper); line-height: 0; }
-.player video { display: block; width: 100%; height: auto; aspect-ratio: 1920 / 1306; background: var(--paper); }
+.player video { display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; background: var(--paper); }
 .play { position: absolute; inset: 0; margin: auto; width: max-content; height: max-content; display: inline-flex; align-items: center; gap: 12px; padding: 16px 24px; font: 400 14px/1 var(--pixel); color: var(--ink); background: var(--yellow); border: 3px solid var(--ink); border-radius: 14px; box-shadow: 0 6px 0 var(--ink); cursor: pointer; transition: transform .12s, box-shadow .12s, background .12s; }
 .play:hover { background: var(--yellow-hover); transform: translateY(-2px); box-shadow: 0 8px 0 var(--ink); }
 .play:active { transform: translateY(4px); box-shadow: 0 2px 0 var(--ink); }
@@ -262,7 +262,7 @@ footer img { width: 30px; height: 30px; flex: none; }
       <div class="window">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>ClubCart</span></div>
         <div class="player" id="player">
-          <video id="demo" preload="metadata" playsinline controls poster="assets/screenshot.jpg" aria-label="ClubCart demo: adding products, reviewing the list, generating the script, copying it, and resetting, with the app's sound effects">
+          <video id="demo" preload="metadata" playsinline controls poster="assets/poster.jpg" aria-label="ClubCart demo: adding products, reviewing the list, generating the script, copying it, and resetting, with the app's sound effects">
             <source src="assets/clubcart-demo.mp4" type="video/mp4">
             Your browser can't play this video. <a href="assets/clubcart-demo.mp4">Download the demo</a>.
           </video>
