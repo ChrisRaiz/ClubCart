@@ -35,6 +35,7 @@ export default function Home({ onReset, justReset = false }: HomeProps) {
     qty,
     setQty,
     urlError,
+    qtyError,
     inputAnim,
     clearInputAnim,
     addCount,
@@ -90,10 +91,18 @@ export default function Home({ onReset, justReset = false }: HomeProps) {
           .replace(/'/g, "\\'")
           .replace(/\r?\n/g, '\\n')}'`;
 
+      // qty goes into the script as a bare number, so it must always be a
+      // positive whole number. The form requires a quantity; this is a
+      // safety net so a bad value can never produce broken JavaScript.
+      const toQty = (value: unknown) => {
+        const n = Number.parseInt(String(value), 10);
+        return Number.isInteger(n) && n > 0 ? n : 1;
+      };
+
       return _products
         .map(
           (product) =>
-            `        {id: ${quote(product.sku)}, qty: ${product.qty}, offer: ${quote(product.offerId)}, name: ${quote(product.name)}, alias: ${quote(product.alias)}},`,
+            `        {id: ${quote(product.sku)}, qty: ${toQty(product.qty)}, offer: ${quote(product.offerId)}, name: ${quote(product.name)}, alias: ${quote(product.alias)}},`,
         )
         .join('\n');
     };
@@ -378,65 +387,49 @@ export default function Home({ onReset, justReset = false }: HomeProps) {
     
   // ─── ADD ITEMS WITH RETRY LOGIC ────────────────────────────────
   for (const item of ITEMS) {
-        console.log(\`▶ ATC Starting for \${item.name}\`);
+    console.log(\`▶ ATC Starting for \${item.name}\`);
 
-    let completed = false;
-
-        // Configs
-        let attempts = 0;
+    const label = item?.alias || item.name;
     const maxAttempts = 5;
-        const timeouts = {
-            init: 100,
-            cart: 100,
-            rerun: 100,
-        };
+    const timeouts = {
+      init: 100,
+      cart: 100,
+      rerun: 100,
+    };
+    let added = false;
 
-        await sleep(timeouts.init);
+    await sleep(timeouts.init);
 
-    while (!completed) {
+    // Each attempt adds the item, then checks the cart. Stops as soon as the
+    // cart holds the target quantity, or after maxAttempts.
+    for (let attempt = 1; attempt <= maxAttempts && !added; attempt++) {
       try {
-        while (attempts < maxAttempts) {
-                    attempts++;
-          console.log(\`🔁 Attempt \${attempts}/\${maxAttempts}: adding item -> \${item?.alias || item.name}\`);
+        console.log(\`🔁 Attempt \${attempt}/\${maxAttempts}: adding item -> \${label}\`);
 
-          await gql('updateItems', HASHES.updateItems, 'mutation', 'POST', getUpdateVariables(item));
-          await sleep(timeouts.cart);
+        await gql('updateItems', HASHES.updateItems, 'mutation', 'POST', getUpdateVariables(item));
+        await sleep(timeouts.cart);
 
-                    const currentQty = await checkCart(item.id);
+        const currentQty = await checkCart(item.id);
 
-                    console.log('🎯	Target Quantity:', item.qty);
-                    console.log('🛒 Cart Quantity:', currentQty);
+        console.log('🎯\tTarget Quantity:', item.qty);
+        console.log('🛒 Cart Quantity:', currentQty);
 
-          // Already added successfully
-          if (currentQty === item.qty) {
-            completed = true;
-            break;
-          }
-        }
-
-                if (attempts >= maxAttempts) {
-                    completed = true;
-                }
-
+        added = currentQty === item.qty;
       } catch (err) {
-
-                if (attempts >= maxAttempts) {
-                    console.error(\`💥 Error processing \${item?.alias || item.name}: Max attempts reached for \${item?.alias || item.name}\n\`, { cause: err });
-                    break;
-
-                } else if (!completed) {
-                    console.warn(\`⚠️ Error processing \${item?.alias || item.name}: Failed to add \${item?.alias || item.name} to cart\n\`, { cause: err });
-                    console.log(\`🔄 Retrying item in \${timeouts.rerun / 1000} seconds...\`);
-
-                }
-
-                await sleep(timeouts.rerun);
+        if (attempt >= maxAttempts) {
+          console.error(\`💥 Error processing \${label}: Max attempts reached for \${label}\n\`, { cause: err });
+        } else {
+          console.warn(\`⚠️ Error processing \${label}: Failed to add \${label} to cart\n\`, { cause: err });
+          console.log(\`🔄 Retrying item in \${timeouts.rerun / 1000} seconds...\`);
+          await sleep(timeouts.rerun);
+        }
       }
-      }
-        (completed && !(attempts >= maxAttempts)) 
-            ? console.log(\`✅ \${item?.alias || item.name} (\${item.id}) ×\${item.qty}\`) 
-            : console.log(\`❌ \${item?.alias || item.name} (\${item.id}) ×\${item.qty}\`)
     }
+
+    // The result depends only on whether the cart reached the target, not on
+    // which attempt got it there.
+    console.log(\`\${added ? '✅' : '❌'} \${label} (\${item.id}) ×\${item.qty}\`);
+  }
 
   console.log('🎉 Done');
 })().then(res => console.log(res)).catch(console.error);`);
@@ -487,6 +480,7 @@ export default function Home({ onReset, justReset = false }: HomeProps) {
         url={urlInput}
         onUrlChange={changeUrlInput}
         error={urlError}
+        qtyError={qtyError}
         inputAnim={inputAnim}
         onInputAnimEnd={clearInputAnim}
         onSubmit={addUrl}

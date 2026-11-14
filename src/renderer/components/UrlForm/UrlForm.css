@@ -34,6 +34,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   .urlInput.urlInputShake,
+  .qtySelect.qtySelectShake,
   .urlInput.urlInputSuccess {
     animation: none;
   }
@@ -75,6 +76,11 @@
   color: var(--red-dark);
   font-weight: 800;
   font-size: 0.875rem;
+}
+
+/* A missing-quantity error lines up with the qty dropdown's text instead. */
+.urlErrorText.urlErrorTextQty {
+  padding-left: 1.125rem;
 }
 
 /* ─── qty dropdown ───────────────────────────────────────────── */
@@ -123,6 +129,17 @@
 /* Options in the open list use normal text colors. */
 .qtySelect option {
   color: var(--text);
+}
+
+/* Missing quantity: same red outline and shake as an invalid URL. */
+.qtySelect.qtySelectError,
+.qtySelect.qtySelectError:focus {
+  border-color: var(--red);
+  box-shadow: 0 0.25rem 0 var(--red-dark);
+}
+
+.qtySelect.qtySelectShake {
+  animation: inputShake 0.3s ease-in-out;
 }
 
 /* Nickname input + URL input side by side. */
