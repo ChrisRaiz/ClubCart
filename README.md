@@ -5,21 +5,19 @@
 <h1 align="center">ClubCart</h1>
 
 <p align="center">
-  A desktop app that turns a list of Sam's Club product links into one add-to-cart script.<br>
-  Paste the links, set a quantity for each, and ClubCart looks up every product and writes a script that adds the whole list to your cart.
+  A desktop app that turned a list of Sam's Club product links into one add-to-cart (ATC) script.<br>
+  <b>The ATC script is deprecated and no longer works.</b> The app remains as a portfolio project for its interface, sound design, and Electron architecture.
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Status-Working%20App-5BB974" alt="Status: Working App">
+  <img src="https://img.shields.io/badge/Status-Deprecated-B4233F" alt="Status: Deprecated">
   <img src="https://img.shields.io/badge/Electron-44-47848F?logo=electron&logoColor=white" alt="Electron 44">
   <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black" alt="React 19">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/electron--vite-646CFF?logo=vite&logoColor=white" alt="electron-vite">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT">
-</p>
+  <img src="https://img.shields.io/badge/electron--vite-646CFF?logo=vite&logoColor=white" alt="electron-vite"></p>
 
 <p align="center">
-  📖 <a href="https://chrisraiz.github.io/ClubCart/"><b>Documentation &amp; demo</b></a>: a video of the app with sound, how it works, the sound design, and setup.
+  📖 <a href="https://chrisraiz.github.io/ClubCart/"><b>Documentation &amp; demo</b></a>: a video of the app with sound, how it was built, the sound design, and setup.
 </p>
 
 <p align="center">
@@ -28,21 +26,29 @@
 
 ---
 
+> [!CAUTION]
+> **Deprecated: the ATC script no longer works.**
+> An update broke the add-to-cart behavior the generated script relied on, and it is no longer supported. I will not be elaborating further on what update broke it.
+>
+> **I uploaded ClubCart specifically because the script is deprecated.** I created it personally as a proof of concept, not with the intention of gaining an advantage during drops.
+>
+> **I do not condone scripting or botting to purchase Pokémon products.** ClubCart stays public only as a portfolio project. See [Deprecation](#deprecation).
+
 > [!IMPORTANT]
 > **ClubCart is an independent personal project.**
-> It isn't affiliated with, endorsed by, or sponsored by Sam's Club or Walmart. Automating actions on a website can go against its terms of use, so check Sam's Club's terms before using the generated script. See the [Disclaimer](#disclaimer).
+> It isn't affiliated with, endorsed by, or sponsored by Sam's Club or Walmart. See the [Disclaimer](#disclaimer).
 
 ---
 
 ## Overview
 
-Adding a long shopping list to a Sam's Club cart usually means opening every product page, setting a quantity, and clicking Add to Cart, one item at a time. ClubCart collects the list up front and does the rest:
+ClubCart was built to take a shopping list of Sam's Club product pages and turn it into a single add-to-cart script. The app itself still runs and works as described below, but the script it generates no longer does (see [Deprecation](#deprecation)). Here's how the app works:
 
 1. **Add products.** Pick a quantity, optionally type an alias, and paste a product page URL. Only `https` samsclub.com product pages are accepted.
 2. **Review the list.** The List dialog shows every item with its alias, URL, and quantity, and lets you remove any of them.
 3. **Generate.** ClubCart loads the products one at a time and reads each one's name, item ID, and offer ID from the page's schema.org product data.
 4. **Verify, if asked.** If Sam's Club sends a request to its "are you human" check, a window opens so you can complete it. It closes by itself once the product is read, and later lookups reuse the session.
-5. **Copy the script.** The output box fills with one script for the whole list. Run it in your browser's console on samsclub.com to add everything to your cart.
+5. **Copy the script.** The output box fills with one script for the whole list. *Deprecated: the script no longer works.*
 
 ---
 
@@ -62,11 +68,11 @@ Adding a long shopping list to a Sam's Club cart usually means opening every pro
 - A URL that fails is skipped, and the rest of the list still loads
 - Live progress on the button and in a status line that screen readers announce
 
-### The Generated Script
+### The Generated Script (Deprecated)
 
 - One script for the whole list, with each item's ID, offer ID, quantity, name, and alias
-- Up to five attempts per item, checking the cart's quantity after each one
-- A ✅ or ❌ result for every item in the console log
+- Made up to five attempts per item, checking the cart's quantity after each one
+- **No longer works.** See [Deprecation](#deprecation).
 
 ### Sound & Motion
 
@@ -77,25 +83,15 @@ Adding a long shopping list to a Sam's Club cart usually means opening every pro
 
 ---
 
-## Using the Script
+## Deprecation
 
-1. Sign in at samsclub.com and stay on any page of the site.
-2. Open the browser console: <kbd>⌘</kbd> <kbd>⌥</kbd> <kbd>J</kbd> on a Mac, or <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>J</kbd> on Windows (Chrome or Edge).
-3. Paste the script and press <kbd>Enter</kbd>. The first time, Chrome may ask you to type `allow pasting`.
+**The ATC script is deprecated and does not work.** An update broke the add-to-cart behavior it relied on, and the script is no longer supported. I will not be elaborating further on what update broke it.
 
-```
-Starting ATC for 3 items (7 total qty)
-▶ ATC Starting for Paper Towels, 12 Rolls
-🔁 Attempt 1/5: adding item -> Paper towels
-🎯 Target Quantity: 2
-🛒 Cart Quantity: 2
-✅ Paper towels (100000001) ×2
-…
-🎉 Done
-```
+**This project was uploaded specifically because the script is deprecated.** I personally created the script as a proof of concept, not with the intention of having an advantage during drops.
 
-> [!WARNING]
-> **Only run scripts you generated yourself.** The script uses your signed-in session to change your cart. ClubCart never sees your password or session, because the script only reads them when you run it in your own browser.
+**I do not condone scripting or botting to purchase Pokémon products.**
+
+ClubCart is kept public only as a portfolio project, to show the desktop app's interface, animation and sound design, and Electron architecture. The app still builds and runs, and the script it generates is left in place only as part of that record. Don't use it.
 
 ---
 
@@ -105,7 +101,7 @@ Starting ATC for 3 items (7 total qty)
 | ----------------------------------------------- | ------------------------------------- |
 | Building the list (validation, alias, quantity) | ✅ Implemented                        |
 | Product lookup with the verification window     | ✅ Implemented                        |
-| Script generation and Copy                      | ✅ Implemented                        |
+| ATC script                                      | ⛔ Deprecated, no longer works        |
 | Sounds and animations                           | ✅ Implemented                        |
 | Custom app icon                                 | ✅ Implemented                        |
 | Packaging for macOS, Windows, and Linux         | 🚧 Configured, not signed or notarized |
@@ -201,8 +197,10 @@ Every lookup saves the HTML it read, which helps when a product page changes and
 
 ## Disclaimer
 
-ClubCart is an independent personal project. It isn't affiliated with, endorsed by, or sponsored by Sam's Club or Walmart, and "Sam's Club" is used only to describe the site the app works with. Automating actions on a website can go against its terms of use, so check Sam's Club's terms before using the generated script. You use it at your own risk.
+ClubCart is an independent personal project. It isn't affiliated with, endorsed by, or sponsored by Sam's Club or Walmart, and "Sam's Club" is used only to describe the site the app was built for. The ATC script is deprecated and no longer works. I do not condone scripting or botting to purchase Pokémon products.
 
 ## License
 
-Built on [Electron React Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate) and released under the [MIT License](LICENSE).
+ClubCart isn't released under an open-source license. Copyright © 2026 Chris Raiz. All rights reserved.
+
+ClubCart is built on [Electron React Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate). The code that comes from it remains under its own MIT License; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).

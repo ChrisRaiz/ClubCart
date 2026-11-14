@@ -1,3 +1,8 @@
+# Third-Party Notices
+
+ClubCart includes code from [Electron React Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate), mainly the build and tooling scripts in `.erb/` and parts of the Electron main process. That code is used under the MIT License below, which applies only to it, not to the rest of ClubCart.
+
+```
 The MIT License (MIT)
 
 Copyright (c) 2015-present Electron React Boilerplate
@@ -19,3 +24,4 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+```
