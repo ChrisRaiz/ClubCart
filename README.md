@@ -28,7 +28,7 @@
 
 > [!CAUTION]
 > **Deprecated: the ATC script no longer works.**
-> An update broke the add-to-cart behavior the generated script relied on, and it is no longer supported. I will not be elaborating further on what update broke it.
+> An update broke the add-to-cart behavior the ATC script relied on, and it is no longer supported. I will not be elaborating further on what update broke it or why the script no longer works.
 >
 > **I uploaded ClubCart specifically because the script is deprecated.** I created it personally as a proof of concept, not with the intention of gaining an advantage during drops.
 >
