@@ -1,0 +1,117 @@
+/* Action bar: List / Generate / Reset buttons, loading spinner, run status line. */
+.actionBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+.actionBar {
+  gap: 0.875rem; /* space between the List and Run ATC buttons */
+}
+
+.listOpen .listCount {
+  min-width: 1.5rem;
+  padding: 0.0625rem 0.4375rem;
+  font-size: 0.75rem;
+}
+.listCountPop {
+  display: inline-block;
+  animation: badgePop 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listCountPop {
+    animation: none;
+  }
+}
+
+@keyframes badgePop {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(1.45);
+    background: var(--green);
+    color: var(--white);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+/* ─── Reset ────────────────────────────────────────────────────── */
+
+/* Disabled because there's nothing to reset. Stays in the theme: same shape
+   and font, on the page's cream color, with a softened dashed outline and a
+   faint shadow, so it reads as "empty slot" rather than a grey, broken button.
+   The "not allowed" cursor differs from the generic disabled "progress" one. */
+.resetButton:disabled,
+.resetButton:disabled:hover,
+.resetButton:disabled:active {
+  /* Still yellow, just a paler, quieter version of the normal button. */
+  background: #f8eccb;
+  color: #a08a52; /* muted golden-brown text */
+  border: 0.1875rem dashed #d9be6a; /* a deeper yellow for the outline */
+  box-shadow: 0 0.125rem 0 #e2cf94;
+  transform: translateY(
+    0.125rem
+  ); /* sits a little lower, like it's pressed in */
+  cursor: not-allowed;
+}
+
+/* Disabled Reset icon: same golden tone as its text, with a softened red dot. */
+.resetButton:disabled .btnIcon {
+  --icon-accent: #e9a094;
+  --icon-shadow: #e2cf94; /* soft yellow shadow to match the disabled button */
+  opacity: 0.85;
+}
+
+/* Reset: a calm, quick transition. The page stays in place and briefly dims
+   while the ball does one spin (half on the way out, half on the way back
+   in). App remounts the screen when resetOut ends — keep that name. */
+.createButton {
+  min-width: 11.5rem;
+}
+
+/* Tiny spinning ball shown in the button while it's loading. */
+.btnSpinner {
+  flex: none;
+  width: 1.05rem;
+  height: 1.05rem;
+  border-radius: 50%;
+  border: 0.125rem solid var(--ink);
+  background: linear-gradient(
+    180deg,
+    var(--red) 0 44%,
+    var(--ink) 44% 56%,
+    var(--white) 56% 100%
+  );
+  animation: btnSpin 0.8s linear infinite;
+}
+
+@keyframes btnSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Status text under the buttons while Create String runs. */
+.runStatus {
+  min-height: 1.4em; /* reserves the line so the page doesn't jump */
+  margin: -0.5rem 0 0;
+  color: var(--navy);
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+/* Reduced motion: slow pulse instead of spinning. */
+@media (prefers-reduced-motion: reduce) {
+  .btnSpinner {
+    animation: btnPulse 1.6s ease-in-out infinite;
+  }
+
+  @keyframes btnPulse {
+    50% {
+      opacity: 0.4;
+    }
+  }
+}

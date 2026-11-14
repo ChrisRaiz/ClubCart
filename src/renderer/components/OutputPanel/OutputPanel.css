@@ -1,0 +1,221 @@
+/* Output panel: text area, Copy button, "thinking" overlay. */
+/* ─── Output "thinking" overlay (while Create String runs) ─────── */
+.outputWrap {
+  position: relative;
+  width: 100%;
+  /* Fills the leftover height of the page, between these limits. */
+  flex: 1 1 auto;
+  min-height: 10rem;
+  max-height: 28rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Covers the text area's inside (inset by its 0.1875rem border), using the
+   same padding and code font so it looks like text inside the box. */
+.outputThinking {
+  position: absolute;
+  inset: 0.1875rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6ch;
+  padding: 1rem 1.125rem;
+  border-radius: calc(var(--radius) - 0.1875rem);
+  background: var(--panel);
+  color: #7a808c;
+  font:
+    500 0.8125rem/1.7 'JetBrains Mono',
+    ui-monospace,
+    'SF Mono',
+    Menlo,
+    monospace;
+  text-align: left;
+  pointer-events: none;
+  animation: thinkingFadeIn 0.2s ease-out;
+}
+
+.thinkingPrompt {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+/* Typewriter: reveals "Generating string" (17 characters) one at a time,
+   then the cursor on its right edge keeps blinking. */
+.thinkingTyping {
+  display: inline-block;
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 0.1em solid #9aa0ab;
+  animation:
+    typing 1.1s steps(17, end) forwards,
+    cursorBlink 0.9s steps(1) infinite;
+}
+
+/* Three dots that pulse in sequence after the text. */
+.thinkingDots {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  height: 1.7em; /* matches the line height so the dots sit on the text line */
+}
+
+.thinkingDots i {
+  width: 0.35em;
+  height: 0.35em;
+  border-radius: 50%;
+  background: var(--red);
+  opacity: 0.25;
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+
+.thinkingDots i:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.thinkingDots i:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  to {
+    width: 17ch;
+  }
+}
+
+@keyframes cursorBlink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-0.2em);
+  }
+}
+
+@keyframes thinkingFadeIn {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Reduced motion: show the full text and static dots, no typing or bouncing. */
+@media (prefers-reduced-motion: reduce) {
+  .outputThinking {
+    animation: none;
+  }
+
+  .thinkingTyping {
+    width: auto;
+    border-right: none;
+    animation: none;
+  }
+
+  .thinkingDots i {
+    animation: none;
+    opacity: 0.6;
+  }
+}
+
+/* ─── Output panel ─────────────────────────────────────────────── */
+.output {
+  display: block; /* no inline gap below it, so the overlay lines up exactly */
+  width: 100%;
+  /* Fills .outputWrap, whose height adapts to the space left on the page. */
+  flex: 1 1 auto;
+  min-height: 0;
+  /* Extra right padding keeps text from running under the Copy button. */
+  padding: 1rem 6.5rem 1rem 1.125rem;
+  /* No manual resizing: a dragged height would override the automatic fit. */
+  resize: none;
+  border-radius: var(--radius);
+  border: 0.1875rem solid var(--ink);
+  background: var(--panel);
+  color: var(--text);
+  /* Code-editor font, with system monospace fonts as fallbacks. */
+  font:
+    500 0.8125rem/1.7 'JetBrains Mono',
+    ui-monospace,
+    'SF Mono',
+    Menlo,
+    Consolas,
+    monospace;
+  font-variant-ligatures: none; /* show => and != as typed, not as joined symbols */
+  tab-size: 2;
+  letter-spacing: 0;
+  text-align: left;
+  box-shadow: 0 0.25rem 0 var(--ink);
+  outline: none;
+}
+
+.output::placeholder {
+  color: #9aa0ab;
+}
+
+.output:focus {
+  border-color: var(--blue);
+}
+/* ─── Copy button (top-right inside the output box) ────────────── */
+/* Every state is set so the generic button hover/active lift and shadow
+   don't apply. */
+.copyButton,
+.copyButton:hover,
+.copyButton:active {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  gap: 0.35rem;
+  height: 2rem;
+  padding: 0 0.65rem;
+  border-radius: 0.5rem;
+  border: 0.125rem solid var(--ink);
+  box-shadow: 0 0.125rem 0 var(--ink);
+  transform: none;
+  font-size: 0.8125rem;
+  font-weight: 800;
+}
+
+.copyButton {
+  background: var(--white);
+  color: var(--text);
+}
+
+.copyButton:hover {
+  background: var(--cream);
+}
+
+.copyButton:active {
+  transform: translateY(0.125rem);
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.copyButton svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.copyButton.copy-copied,
+.copyButton.copy-copied:hover {
+  background: var(--green);
+  border-color: var(--green-dark);
+  box-shadow: 0 0.125rem 0 var(--green-dark);
+  color: var(--white);
+}
+
+.copyButton.copy-failed,
+.copyButton.copy-failed:hover {
+  background: var(--red);
+  border-color: var(--red-dark);
+  box-shadow: 0 0.125rem 0 var(--red-dark);
+  color: var(--white);
+}
+
+/* Screen-reader-only text. */

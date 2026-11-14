@@ -1,0 +1,229 @@
+/* List dialog: modal shell and the list card inside it. */
+.listDialog {
+  width: min(35rem, calc(100vw - 2rem));
+  padding: 0;
+  border: none;
+  background: transparent;
+  overflow: visible; /* let the card's shadow show */
+}
+
+.listDialog::backdrop {
+  background: rgba(58, 63, 75, 0.45);
+}
+
+.listDialog[open] {
+  animation: dialogIn 0.16s ease-out;
+}
+
+@keyframes dialogIn {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .listDialog[open] {
+    animation: none;
+  }
+}
+
+.listHeaderRight {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+/* Small square close button; every state set so the generic button
+   hover/active rules don't apply their lift and shadow. */
+.listClose,
+.listClose:hover,
+.listClose:active {
+  width: 1.875rem;
+  height: 1.875rem;
+  padding: 0;
+  border-radius: 0.5rem;
+  border: 0.125rem solid var(--ink);
+  box-shadow: none;
+  transform: none;
+  font-size: 0.875rem;
+}
+
+.listClose {
+  background: var(--white);
+}
+
+.listClose:hover {
+  background: var(--cream);
+}
+
+.listClose:active {
+  background: #eceef1;
+}
+
+/* ─── List card ────────────────────────────────────────────────── */
+.listCard {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 0.1875rem solid var(--ink);
+  background: var(--panel);
+  box-shadow: 0 0.25rem 0 var(--ink);
+  overflow: hidden; /* keeps the header and rows inside the rounded corners */
+  text-align: left;
+}
+
+.listHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.625rem 1rem;
+  background: var(--red);
+  border-bottom: 0.1875rem solid var(--ink);
+}
+
+.listHeader h2 {
+  margin: 0;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  color: var(--white);
+  text-shadow: 0.125rem 0.125rem 0 var(--red-dark);
+}
+
+.listCount {
+  min-width: 1.75rem;
+  padding: 0.1875rem 0.5rem;
+  border-radius: 62.4375rem;
+  border: 0.125rem solid var(--ink);
+  background: var(--yellow);
+  color: var(--text);
+  font-weight: 800;
+  font-size: 0.8125rem;
+  text-align: center;
+}
+
+.listBody {
+  margin: 0;
+  padding: 0;
+  max-height: min(60vh, 26.25rem); /* scrolls once it has more rows than fit */
+  overflow-y: auto;
+}
+
+.listRow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.625rem 1rem;
+  border-bottom: 0.125rem solid #eceef1;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.listRow:last-child {
+  border-bottom: none;
+}
+
+.listRow:nth-child(even) {
+  background: var(--cream);
+}
+
+.listIndex {
+  flex: none;
+  width: 1.625rem;
+  height: 1.625rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  border: 0.125rem solid var(--ink);
+  background: var(--white);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+.listText {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis; /* long entries end in … instead of wrapping */
+  white-space: nowrap;
+}
+
+/* Small "#qty" badge on rows that were added with a qty selected. */
+.listQty {
+  flex: none;
+  padding: 0.15rem 0.55rem;
+  border-radius: 62.4375rem;
+  border: 0.125rem solid var(--ink);
+  background: var(--yellow);
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 800;
+}
+
+/* Rows with a nickname: nickname on top, the URL small and muted below. */
+.listAlias,
+.listUrl {
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.listAlias {
+  font-weight: 800;
+}
+
+.listUrl {
+  margin-top: 0.1rem;
+  color: #8a909c;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+/* Per-row delete button: a borderless trash icon, muted gray until hovered,
+   so it reads differently from the dialog's outlined ✕ close button.
+   Every state is set so the generic button hover/active lift and shadow
+   don't apply. */
+.listDelete,
+.listDelete:hover,
+.listDelete:active {
+  flex: none;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border-radius: 50%;
+  border: none;
+  box-shadow: none;
+  transform: none;
+}
+
+.listDelete {
+  background: transparent;
+  color: #9aa0ab;
+}
+
+.listDelete:hover {
+  background: rgba(229, 82, 63, 0.12); /* light tint of --red */
+  color: var(--red);
+}
+
+.listDelete:active {
+  background: rgba(229, 82, 63, 0.22);
+  color: var(--red-dark);
+}
+
+.listDelete svg {
+  width: 1.125rem;
+  height: 1.125rem;
+}
+
+.listEmpty {
+  margin: 0;
+  padding: 1.375rem 1rem;
+  text-align: center;
+  color: #8a909c;
+  font-weight: 700;
+}
