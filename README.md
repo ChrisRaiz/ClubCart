@@ -32,6 +32,8 @@
 > **Deprecated: the ATC script no longer works.**
 > An update broke the add-to-cart behavior the generated script relied on, and it is no longer supported. I will not be elaborating further on what update broke it.
 >
+> **I uploaded ClubCart specifically because the script is deprecated.** I created it personally as a proof of concept, not with the intention of gaining an advantage during drops.
+>
 > **I do not condone scripting or botting to purchase Pokémon products.** ClubCart stays public only as a portfolio project. See [Deprecation](#deprecation).
 
 > [!IMPORTANT]
@@ -86,6 +88,8 @@ ClubCart was built to take a shopping list of Sam's Club product pages and turn 
 ## Deprecation
 
 **The ATC script is deprecated and does not work.** An update broke the add-to-cart behavior it relied on, and the script is no longer supported. I will not be elaborating further on what update broke it.
+
+**This project was uploaded specifically because the script is deprecated.** I personally created the script as a proof of concept, not with the intention of having an advantage during drops.
 
 **I do not condone scripting or botting to purchase Pokémon products.**
 
