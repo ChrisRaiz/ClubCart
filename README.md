@@ -14,9 +14,7 @@
   <img src="https://img.shields.io/badge/Electron-44-47848F?logo=electron&logoColor=white" alt="Electron 44">
   <img src="https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black" alt="React 19">
   <img src="https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white" alt="TypeScript">
-  <img src="https://img.shields.io/badge/electron--vite-646CFF?logo=vite&logoColor=white" alt="electron-vite">
-  <img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License: MIT">
-</p>
+  <img src="https://img.shields.io/badge/electron--vite-646CFF?logo=vite&logoColor=white" alt="electron-vite"></p>
 
 <p align="center">
   📖 <a href="https://chrisraiz.github.io/ClubCart/"><b>Documentation &amp; demo</b></a>: a video of the app with sound, how it was built, the sound design, and setup.
@@ -203,4 +201,6 @@ ClubCart is an independent personal project. It isn't affiliated with, endorsed 
 
 ## License
 
-Built on [Electron React Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate) and released under the [MIT License](LICENSE).
+ClubCart isn't released under an open-source license. Copyright © 2026 Chris Raiz. All rights reserved.
+
+ClubCart is built on [Electron React Boilerplate](https://github.com/electron-react-boilerplate/electron-react-boilerplate). The code that comes from it remains under its own MIT License; see [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
