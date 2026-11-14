@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ClubCart · Documentation</title>
-<meta name="description" content="Documentation and demo for ClubCart, a desktop app that turns a list of Sam's Club product links into one add-to-cart script.">
+<meta name="description" content="Documentation and demo for ClubCart, a desktop app that turned a list of Sam's Club product links into one add-to-cart script. The script is deprecated and no longer works.">
 <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,6 +62,15 @@ nav.side { position: sticky; top: 0; height: 100vh; overflow-y: auto; padding: 2
 .side .sub a.active { color: var(--red-dark); background: var(--red-soft); box-shadow: none; }
 .repo { display: inline-flex; gap: 8px; align-items: center; margin-top: 28px; padding: 8px 12px; border: 2px solid var(--ink); border-radius: 10px; color: var(--ink); background: var(--panel); text-decoration: none; font-size: 14px; font-weight: 700; box-shadow: 0 3px 0 var(--ink); }
 .repo:hover { background: var(--yellow-soft); }
+
+/* Deprecation */
+.badge.dep { color: #B4233F; background: #FFE2E6; border-color: #F5B9C3; }
+.badge.dep::before { background: #B4233F; animation: none; }
+.deprecated { max-width: 920px; margin: 0 0 32px; padding: 18px 22px; background: #FFF4F2; border: 3px solid var(--ink); border-left: 10px solid var(--red); border-radius: 14px; box-shadow: 0 5px 0 var(--ink); }
+.deprecated h2 { margin: 0 0 10px; font-size: 15px; color: var(--red-dark); }
+.deprecated h2::before { display: none; }
+.deprecated p { margin: 0 0 8px; }
+.deprecated p:last-child { margin-bottom: 0; }
 
 main { padding: 40px 48px 96px; min-width: 0; }
 .content { max-width: 800px; }
@@ -218,7 +227,7 @@ footer img { width: 30px; height: 30px; flex: none; }
       <li><a href="#top">Demo</a></li>
       <li><a href="#overview">Overview</a></li>
       <li><a href="#workflow">How it works</a></li>
-      <li><a href="#script">Using the script</a></li>
+      <li><a href="#deprecation">Deprecation</a></li>
       <li><a href="#sounds">Sound design</a></li>
       <li><a href="#interface">The interface</a></li>
       <li><a href="#architecture">Architecture</a></li>
@@ -239,9 +248,15 @@ footer img { width: 30px; height: 30px; flex: none; }
 
   <main id="top">
     <header class="hero">
-      <span class="badge">Working app</span>
+      <span class="badge dep">Deprecated</span>
       <h1>ClubCart</h1>
-      <p class="lede">A desktop app that turns a list of Sam's Club product links into one add-to-cart script. Paste the links, set a quantity for each, and ClubCart looks up every product and writes a script that adds the whole list to your cart.</p>
+      <p class="lede">A desktop app that turned a list of Sam's Club product links into one add-to-cart (ATC) script. The app remains as a portfolio project for its interface, sound design, and Electron architecture.</p>
+
+      <div class="deprecated" role="note" aria-labelledby="dep-title">
+        <h2 id="dep-title">Deprecated: the ATC script no longer works</h2>
+        <p>An update broke the add-to-cart behavior the generated script relied on, and it is no longer supported. I will not be elaborating further on what update broke it.</p>
+        <p><strong>I do not condone scripting or botting to purchase Pokémon products.</strong></p>
+      </div>
 
       <div class="window">
         <div class="bar" aria-hidden="true"><i></i><i></i><i></i><span>ClubCart</span></div>
@@ -276,14 +291,14 @@ footer img { width: 30px; height: 30px; flex: none; }
     <div class="content">
       <section id="overview" style="margin-top:0">
         <h2>Overview</h2>
-        <p>Adding a long shopping list to a Sam's Club cart usually means opening every product page, setting a quantity, and clicking Add to Cart, one item at a time. ClubCart collects the list up front, reads each product's item ID and offer ID from its page, and generates a script that adds everything in a single run, checking the cart after each item.</p>
+        <p>ClubCart was built to take a list of Sam's Club product pages, read each product's item ID and offer ID, and turn the list into a single add-to-cart script. The app still runs and works as described on this page, but the script it generates no longer does. See <a href="#deprecation">Deprecation</a>.</p>
         <div class="note info"><strong>ClubCart is an independent personal project.</strong> It isn't affiliated with or endorsed by Sam's Club. See the <a href="#disclaimer">disclaimer</a>.</div>
         <div class="features">
           <div class="feat wide"><h3>Build a list</h3><p>Add products one at a time, each with its own settings.</p>
             <ul><li>Quantity from 1 to 20 and an optional alias</li><li>URLs checked as you add them, and duplicates skipped</li><li>Review and remove items in the List dialog</li></ul></div>
           <div class="feat mid"><h3>Product lookup</h3><p>Name, item ID and offer ID are read from each product page.</p></div>
           <div class="feat third"><h3>Bot check</h3><p>If the site asks you to verify, a window opens. Pass it once and later lookups reuse the session.</p></div>
-          <div class="feat third"><h3>One script</h3><p>Adds the whole list, retrying and checking the cart for each item.</p></div>
+          <div class="feat third"><h3>One script</h3><p>Generated a single script for the whole list. Deprecated, and no longer works.</p></div>
           <div class="feat third"><h3>Sound &amp; motion</h3><p>Six synthesized sounds and an animation for every action.</p></div>
         </div>
       </section>
@@ -295,29 +310,15 @@ footer img { width: 30px; height: 30px; flex: none; }
           <li><strong>Review the list</strong><p><b>List</b> shows every item with its alias, URL, and quantity. Remove anything you don't want.</p></li>
           <li><strong>Generate</strong><p>ClubCart loads the products one at a time and reads each one's name, item ID, and offer ID from the page's product data. The button and status line show how far along it is.</p></li>
           <li><strong>Verify, if asked</strong><p>If Sam's Club sends a request to its "are you human" check, a window opens on that page. Complete the check, and the window closes by itself as soon as the product is read.</p></li>
-          <li><strong>Copy the script</strong><p>The output box fills with the script, and <b>Copy</b> puts it on your clipboard. Any URL that fails is skipped, and the rest of the list still loads.</p></li>
+          <li><strong>Copy the script</strong><p>The output box fills with the script, and <b>Copy</b> puts it on your clipboard. Any URL that fails is skipped, and the rest of the list still loads. The script itself is deprecated and no longer works.</p></li>
         </ol>
       </section>
 
-      <section id="script">
-        <h2>Using the script</h2>
-        <p>The script runs in your own browser, on samsclub.com, while you're signed in. It adds each item through the same cart requests the website makes, then checks the cart to confirm the quantity.</p>
-        <ol class="steps">
-          <li>Sign in at samsclub.com and stay on any page of the site.</li>
-          <li>Open the browser's console: <kbd>⌘</kbd> <kbd>⌥</kbd> <kbd>J</kbd> on a Mac, or <kbd>Ctrl</kbd> <kbd>Shift</kbd> <kbd>J</kbd> on Windows, in Chrome or Edge.</li>
-          <li>Paste the script and press <kbd>Enter</kbd>. The first time, Chrome may ask you to type <code>allow pasting</code>.</li>
-          <li>Watch the log. Each item gets up to five attempts, and ends with ✅ when the cart has the right quantity or ❌ when it doesn't.</li>
-        </ol>
-        <div class="code"><div class="top"><span>Console output</span></div><pre>Starting ATC for 3 items (7 total qty)
-▶ ATC Starting for Paper Towels, 12 Rolls
-🔁 Attempt 1/5: adding item -&gt; Paper towels
-<span class="c">Cart quantity for 100000001: 2</span>
-🎯 Target Quantity: 2
-🛒 Cart Quantity: 2
-<span class="g">✅ Paper towels (100000001) ×2</span>
-<span class="c">…</span>
-🎉 Done</pre></div>
-        <div class="note warn"><strong>Only run scripts you generated yourself.</strong> The script uses your signed-in session to change your cart. ClubCart never sees your password or session, because the script only reads them when you run it in your own browser.</div>
+      <section id="deprecation">
+        <h2>Deprecation</h2>
+        <p><strong>The ATC script is deprecated and does not work.</strong> An update broke the add-to-cart behavior it relied on, and the script is no longer supported. I will not be elaborating further on what update broke it.</p>
+        <p><strong>I do not condone scripting or botting to purchase Pokémon products.</strong></p>
+        <p>ClubCart is kept public only as a portfolio project, to show the desktop app's interface, animation and sound design, and Electron architecture. The app still builds and runs, and the script it generates is left in place only as part of that record. Don't use it.</p>
       </section>
 
       <section id="sounds">
@@ -440,7 +441,7 @@ footer img { width: 30px; height: 30px; flex: none; }
           <tbody>
             <tr><td>Building the list (validation, alias, quantity)</td><td><span class="st done">Implemented</span></td></tr>
             <tr><td>Product lookup with the verification window</td><td><span class="st done">Implemented</span></td></tr>
-            <tr><td>Script generation and Copy</td><td><span class="st done">Implemented</span></td></tr>
+            <tr><td>ATC script</td><td><span class="st no">Deprecated</span> no longer works</td></tr>
             <tr><td>Sounds and animations</td><td><span class="st done">Implemented</span></td></tr>
             <tr><td>Custom app icon</td><td><span class="st done">Implemented</span></td></tr>
             <tr><td>Packaging for macOS, Windows, and Linux</td><td><span class="st prog">Configured</span> not signed or notarized</td></tr>
@@ -483,11 +484,11 @@ cd ClubCart</pre></div></li>
 
       <section id="disclaimer">
         <h2>Disclaimer</h2>
-        <p>ClubCart is an independent personal project. It isn't affiliated with, endorsed by, or sponsored by Sam's Club or Walmart, and "Sam's Club" is used only to describe the site the app works with. Automating actions on a website can go against its terms of use, so check Sam's Club's terms before using the generated script. You use it at your own risk.</p>
+        <p>ClubCart is an independent personal project. It isn't affiliated with, endorsed by, or sponsored by Sam's Club or Walmart, and "Sam's Club" is used only to describe the site the app was built for. The ATC script is deprecated and no longer works. I do not condone scripting or botting to purchase Pokémon products.</p>
         <p>ClubCart is built on <a href="https://github.com/electron-react-boilerplate/electron-react-boilerplate">Electron React Boilerplate</a> and released under the MIT License.</p>
       </section>
 
-      <footer><img src="assets/logo.svg" alt="">Built by Chris Raiz. ClubCart is a personal project and isn't affiliated with Sam's Club.</footer>
+      <footer><img src="assets/logo.svg" alt="">Built by Chris Raiz. ClubCart is a personal project and isn't affiliated with Sam's Club. Its ATC script is deprecated and no longer works.</footer>
     </div>
   </main>
 </div>
