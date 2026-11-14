@@ -1,0 +1,238 @@
+/* URL form: quantity picker, alias input, URL input with inner Add button, error message. */
+/* ─── URL input with a button inside its right edge ────────────── */
+/* Holds the input row plus its error message. */
+.inputField {
+  width: 100%;
+}
+
+/* Error state: red outline and shadow, plus a short shake. */
+.urlInput.urlInputError,
+.urlInput.urlInputError:focus {
+  border-color: var(--red);
+  box-shadow: 0 0.25rem 0 var(--red-dark);
+}
+
+/* Replays on every invalid submit (class is removed when it finishes). */
+.urlInput.urlInputShake {
+  animation: inputShake 0.3s ease-in-out;
+}
+
+@keyframes inputShake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-0.375rem);
+  }
+  40%,
+  80% {
+    transform: translateX(0.375rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .urlInput.urlInputShake,
+  .urlInput.urlInputSuccess {
+    animation: none;
+  }
+}
+
+/* Success: the outline flashes green and the input gives a small bounce. */
+.urlInput.urlInputSuccess {
+  animation: inputSuccess 0.55s ease-out;
+}
+
+@keyframes inputSuccess {
+  0% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.015);
+    border-color: var(--green);
+    box-shadow:
+      0 0.25rem 0 var(--green-dark),
+      0 0 0 0.3rem rgba(91, 185, 116, 0.25);
+  }
+  70% {
+    border-color: var(--green);
+    box-shadow: 0 0.25rem 0 var(--green-dark);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* The List button's count badge pops when a URL is added. */
+.urlErrorText {
+  margin: 0.625rem 0 0;
+  /* Lines up with the URL input's text: past the qty dropdown (7.5rem) and
+     nickname input (24% of the row), their two 0.75rem gaps, and the URL
+     input's own 1.125rem padding. */
+  padding-left: calc(7.5rem + 24% + 1.5rem + 1.125rem);
+  text-align: left;
+  color: var(--red-dark);
+  font-weight: 800;
+  font-size: 0.875rem;
+}
+
+/* ─── qty dropdown ───────────────────────────────────────────── */
+/* Compact pill select, leftmost in the input row (qty numbers 1–20). */
+.qtySelect {
+  flex: 0 0 7.8rem;
+  min-width: 0;
+  height: 3.25rem; /* same height as the other inputs in the row */
+  padding: 0 2.25rem 0 1.125rem; /* right padding leaves room for the arrow */
+  border-radius: 62.4375rem;
+  border: 0.1875rem solid var(--ink);
+  /* Pixel-art down arrow (5×3 pixels) in the --ink color, on the right. */
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 5 3' shape-rendering='crispEdges'%3E%3Cpath fill='%233a3f4b' d='M0 0h5v1H0zM1 1h3v1H1zM2 2h1v1H2z'/%3E%3C/svg%3E")
+      no-repeat right 0.95rem center / 0.75rem auto,
+    var(--panel);
+  color: var(--text);
+  font:
+    700 0.9375rem 'Nunito',
+    system-ui,
+    sans-serif;
+  text-align: left;
+  box-shadow: 0 0.25rem 0 var(--ink);
+  outline: none;
+  cursor: pointer;
+  appearance: none; /* hide the default arrow; ours is the background */
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+/* Placeholder look while nothing is selected. */
+.qtySelect.qtySelectEmpty {
+  color: #8a909c;
+}
+
+.qtySelect:hover {
+  background-color: var(--cream);
+}
+
+.qtySelect:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0.25rem 0 var(--navy);
+}
+
+/* Options in the open list use normal text colors. */
+.qtySelect option {
+  color: var(--text);
+}
+
+/* Nickname input + URL input side by side. */
+.inputRow {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+}
+
+.inputWrap {
+  position: relative;
+  flex: 1; /* URL input takes the rest of the row */
+  min-width: 0;
+}
+
+/* Nickname: same pill look as the URL input, narrower and without the
+   inner button. */
+.aliasInput {
+  flex: 0 0 24%;
+  min-width: 0;
+  height: 3.25rem;
+  padding: 0 1.125rem;
+  border-radius: 62.4375rem;
+  border: 0.1875rem solid var(--ink);
+  background: var(--panel);
+  color: var(--text);
+  font:
+    700 0.9375rem 'Nunito',
+    system-ui,
+    sans-serif;
+  box-shadow: 0 0.25rem 0 var(--ink);
+  outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.aliasInput::placeholder {
+  color: #8a909c;
+}
+
+.aliasInput:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0.25rem 0 var(--navy);
+}
+
+.urlInput {
+  width: 100%;
+  height: 3.25rem;
+  padding: 0 4.6rem 0 1.125rem; /* right padding leaves room for the button */
+  border-radius: 62.4375rem;
+  border: 0.1875rem solid var(--ink);
+  background: var(--panel);
+  color: var(--text);
+  font:
+    700 0.9375rem 'Nunito',
+    system-ui,
+    sans-serif;
+  box-shadow: 0 0.25rem 0 var(--ink);
+  outline: none;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.urlInput::placeholder {
+  color: #8a909c;
+}
+
+/* Focus: the outline just turns solid blue, with no glow around it. */
+.urlInput:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0.25rem 0 var(--navy);
+}
+
+/* Same look as the main (Run ATC) button, scaled down to fit inside the
+   input. Every state is set here, with the -50% vertical centering built in,
+   so the generic button:hover / button:active rules can't misplace it. */
+.inputButton {
+  position: absolute;
+  top: 50%;
+  right: 0.5rem;
+  transform: translateY(
+    calc(-50% - 0.125rem)
+  ); /* nudged up to leave room for its shadow */
+  height: 2.125rem;
+  padding: 0 0.875rem;
+  border-radius: 0.625rem;
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  border: 0.1875rem solid var(--ink);
+  background: var(--yellow);
+  color: var(--text);
+  font-size: 1rem;
+  line-height: 1;
+  box-shadow: 0 0.1875rem 0 var(--ink);
+}
+
+.inputButton:hover {
+  background: var(--yellow-hover);
+  transform: translateY(calc(-50% - 0.1875rem));
+  box-shadow: 0 0.25rem 0 var(--ink);
+}
+
+.inputButton:active {
+  transform: translateY(calc(-50% + 0.0625rem));
+  box-shadow: 0 0 0 var(--ink);
+}
+
+.inputButton:focus-visible {
+  outline: 0.1875rem solid var(--blue);
+  outline-offset: 0.125rem;
+}
