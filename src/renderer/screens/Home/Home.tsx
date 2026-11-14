@@ -35,6 +35,7 @@ export default function Home({ onReset, justReset = false }: HomeProps) {
     qty,
     setQty,
     urlError,
+    qtyError,
     inputAnim,
     clearInputAnim,
     addCount,
@@ -90,10 +91,18 @@ export default function Home({ onReset, justReset = false }: HomeProps) {
           .replace(/'/g, "\\'")
           .replace(/\r?\n/g, '\\n')}'`;
 
+      // qty goes into the script as a bare number, so it must always be a
+      // positive whole number. The form requires a quantity; this is a
+      // safety net so a bad value can never produce broken JavaScript.
+      const toQty = (value: unknown) => {
+        const n = Number.parseInt(String(value), 10);
+        return Number.isInteger(n) && n > 0 ? n : 1;
+      };
+
       return _products
         .map(
           (product) =>
-            `        {id: ${quote(product.sku)}, qty: ${product.qty}, offer: ${quote(product.offerId)}, name: ${quote(product.name)}, alias: ${quote(product.alias)}},`,
+            `        {id: ${quote(product.sku)}, qty: ${toQty(product.qty)}, offer: ${quote(product.offerId)}, name: ${quote(product.name)}, alias: ${quote(product.alias)}},`,
         )
         .join('\n');
     };
@@ -487,6 +496,7 @@ export default function Home({ onReset, justReset = false }: HomeProps) {
         url={urlInput}
         onUrlChange={changeUrlInput}
         error={urlError}
+        qtyError={qtyError}
         inputAnim={inputAnim}
         onInputAnimEnd={clearInputAnim}
         onSubmit={addUrl}
