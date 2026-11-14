@@ -1,0 +1,34 @@
+/* Pixel-art button icons (see PixelIcons.tsx). */
+/* ─── Button icons (see icons.tsx) ─────────────────────────────── */
+/* Pixel-art icons: 12×12 grid plus a 1-pixel drop shadow (13×13 total), so
+   1.625rem ≈ 2 screen px per "pixel" at the default window size.
+   Outline = button text color; --icon-accent = red parts; --icon-light =
+   white parts; --icon-shadow = the blue offset shadow, like the title's. */
+.btnIcon {
+  flex: none;
+  width: 1.625rem;
+  height: 1.625rem;
+  --icon-accent: var(--red);
+  --icon-light: #fff;
+  --icon-shadow: var(--blue);
+  image-rendering: pixelated;
+  /* steps(): moves in hard jumps like an old game sprite, not a smooth glide */
+  transition: transform 0.16s steps(2, end);
+}
+
+/* Hover: a little sprite "hop" up by one pixel. */
+button:not(:disabled):hover .btnIcon {
+  transform: translateY(-0.125rem);
+}
+
+/* Reset's arrow turns a quarter (90° keeps the pixels crisp), hinting at what
+   it does. */
+.resetButton:not(:disabled):hover .btnIcon {
+  transform: rotate(-90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btnIcon {
+    transition: none;
+  }
+}
