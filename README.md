@@ -107,8 +107,8 @@ Starting ATC for 3 items (7 total qty)
 | Product lookup with the verification window     | ✅ Implemented                        |
 | Script generation and Copy                      | ✅ Implemented                        |
 | Sounds and animations                           | ✅ Implemented                        |
+| Custom app icon                                 | ✅ Implemented                        |
 | Packaging for macOS, Windows, and Linux         | 🚧 Configured, not signed or notarized |
-| Custom app icon                                 | ❌ Not started (uses the boilerplate icon) |
 | Published downloads                             | ❌ Not started                        |
 | Automated tests                                 | ❌ Not started                        |
 
